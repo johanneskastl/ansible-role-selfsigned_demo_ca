@@ -4,6 +4,7 @@
 - name: "Load variables"
   include_vars: "{{ item }}"
   with_first_found:
+    - "vars_{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
     - "vars_{{ ansible_distribution }}.yml"
     - "vars_{{ ansible_os_family }}.yml"
 

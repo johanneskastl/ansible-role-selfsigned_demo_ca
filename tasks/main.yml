@@ -1,6 +1,12 @@
 ---
 # selfsigned_demo_ca/tasks/main.yml
 
+- name: "Load variables"
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "vars_{{ ansible_distribution }}.yml"
+    - "vars_{{ ansible_os_family }}.yml"
+
 #
 # pre-flight checks
 #

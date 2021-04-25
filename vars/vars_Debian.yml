@@ -1,0 +1,6 @@
+---
+# selfsigned_demo_ca/vars/vars_Debian.yml
+
+# python crypto packages to be installed
+python_crypto_packages:
+  - 'python-cryptography'

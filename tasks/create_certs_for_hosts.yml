@@ -34,5 +34,9 @@
     csr_path: "{{ ca_target_folder }}{{ ansible_fqdn }}.csr"
     ownca_path: "{{ ca_target_folder }}{{ ca_crt_file }}"
     ownca_privatekey_path: "{{ ca_target_folder }}{{ ca_key_file }}"
+    ownca_privatekey_passphrase: "{{ ownca_privatekey_passphrase }}"
     provider: ownca
+  become: 'false'
   delegate_to: localhost
+  # FIXME
+  ignore_errors: "{{ ansible_check_mode }}"

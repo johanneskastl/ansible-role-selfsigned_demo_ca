@@ -9,7 +9,6 @@
     path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"
 
 - name: 'generate a CSR on the host'
-  become: true
   openssl_csr:
     path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.csr"
     privatekey_path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"

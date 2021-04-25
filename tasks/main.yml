@@ -11,6 +11,11 @@
 #
 # pre-flight checks
 #
+- name: 'fail if variable for rootca is not defined'
+  fail:
+    msg: 'variable for rootca is not defined'
+  when: 'ownca_privatekey_passphrase is undefined'
+
 - name: 'Set variable ca_target_folder if it is undefined'
   set_fact:
     ca_target_folder: "{{ default_ca_target_folder }}"

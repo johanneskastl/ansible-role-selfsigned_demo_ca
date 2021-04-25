@@ -16,6 +16,8 @@
 - name: 'generate private key on the host'
   openssl_privatekey:
     path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"
+  # FIXME
+  ignore_errors: "{{ ansible_check_mode }}"
 
 - name: 'generate a CSR on the host'
   openssl_csr:

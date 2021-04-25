@@ -16,6 +16,8 @@
     organization_name: "{{ default_organization_name }}"
     common_name: "{{ ansible_fqdn }}"
     subject_alt_name: "DNS:{{ ansible_host }},DNS:{{ ansible_fqdn }}"
+  # FIXME
+  ignore_errors: "{{ ansible_check_mode }}"
 
 #
 # Tasks on localhost aka the ansible control host

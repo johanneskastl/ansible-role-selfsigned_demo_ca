@@ -68,3 +68,30 @@
     dest: "{{ host_certs_target_folder }}{{ ca_crt_file }}"
   # FIXME
   ignore_errors: "{{ ansible_check_mode }}"
+
+#
+# Fix user/group/permissions on the files
+#
+- name: 'fix user, group and permissions on certificate files'
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner }}"
+    group:  "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  loop:
+    - path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"
+      owner: "{{ certs_file_user | default(default_certs_file_user) }}"
+      group: "{{ certs_file_group | default(default_certs_file_group) }}"
+      mode: "{{ certs_key_file_mode | default(default_certs_key_file_mode) }}"
+    - path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.csr"
+      owner: "{{ certs_file_user | default(default_certs_file_user) }}"
+      group: "{{ certs_file_group | default(default_certs_file_group) }}"
+      mode: "{{ certs_file_mode | default(default_certs_file_mode) }}"
+    - path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.crt"
+      owner: "{{ certs_file_user | default(default_certs_file_user) }}"
+      group: "{{ certs_file_group | default(default_certs_file_group) }}"
+      mode: "{{ certs_file_mode | default(default_certs_file_mode) }}"
+    - path: "{{ host_certs_target_folder }}{{ ca_crt_file }}"
+      owner: "{{ certs_file_user | default(default_certs_file_user) }}"
+      group: "{{ certs_file_group | default(default_certs_file_group) }}"
+      mode: "{{ certs_file_mode | default(default_certs_file_mode) }}"

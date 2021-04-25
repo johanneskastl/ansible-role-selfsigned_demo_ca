@@ -10,7 +10,7 @@ default_ca_target_folder: '/etc/pki/tls/private/'
 default_host_certs_target_folder: '/etc/pki/tls/private/'
 default_certs_file_user: 'root'
 default_certs_file_group: 'root'
-default_certs_file_mode: '0600'
+default_certs_file_mode: '0644'
 default_certs_directory_mode: '0700'
 
 # ca settings

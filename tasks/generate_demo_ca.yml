@@ -1,0 +1,8 @@
+---
+# selfsigned_demo_ca/tasks/generate_demo_ca.yml
+
+- name: 'create the directory'
+  file:
+    path: "ca_target_folder"
+    state: 'directory'
+    mode: "0700"

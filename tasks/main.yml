@@ -30,3 +30,10 @@
 - name: 'Generate the demo CA'
   import_tasks: generate_demo_ca.yml
   when: 'generate_demo_ca | bool'
+
+#
+# creating certificates for the hosts
+#
+- name: 'create certificates for hosts'
+  import_tasks: create_certs_for_hosts.yml
+  when: 'create_certs_for_hosts | bool'

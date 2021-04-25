@@ -13,6 +13,15 @@
     group: "{{ certs_file_group | default(default_certs_file_group) }}"
     mode: "{{ certs_directory_mode | default(default_certs_directory_mode) }}"
 
+- name: "fix SELinux context for {{ host_certs_target_folder }}"
+  file:
+    path: "{{ host_certs_target_folder }}"
+    state: 'directory'
+    setype: "{{ selinux_setype }}"
+  when:
+    - 'ansible_selinux.status is defined'
+    - 'ansible_selinux.status == "enabled"'
+
 - name: 'generate private key on the host'
   openssl_privatekey:
     path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"

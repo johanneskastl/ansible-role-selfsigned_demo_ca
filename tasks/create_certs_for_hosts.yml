@@ -48,8 +48,12 @@
   copy:
     src: "{{ ca_target_folder }}{{ ansible_fqdn }}.crt"
     dest: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.crt"
+  # FIXME
+  ignore_errors: "{{ ansible_check_mode }}"
 
 - name: 'copy the CA certificate back to the host'
   copy:
     src: "{{ ca_target_folder }}{{ ca_crt_file }}"
     dest: "{{ host_certs_target_folder }}{{ ca_crt_file }}"
+  # FIXME
+  ignore_errors: "{{ ansible_check_mode }}"

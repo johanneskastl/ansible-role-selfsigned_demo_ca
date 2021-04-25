@@ -4,6 +4,15 @@
 #
 # Tasks on the host
 #
+
+- name: 'create the directory for the certificates'
+  file:
+    path: "{{ host_certs_target_folder }}"
+    state: 'directory'
+    owner: "{{ certs_file_user | default(default_certs_file_user) }}"
+    group: "{{ certs_file_group | default(default_certs_file_group) }}"
+    mode: "{{ certs_directory_mode | default(default_certs_directory_mode) }}"
+
 - name: 'generate private key on the host'
   openssl_privatekey:
     path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"

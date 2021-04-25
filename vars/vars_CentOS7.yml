@@ -5,3 +5,5 @@
 python_crypto_packages:
   - 'python-cryptography'
 
+# SELinux context type
+selinux_setype: 'slapd_cert_t'

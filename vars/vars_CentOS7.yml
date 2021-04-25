@@ -1,0 +1,7 @@
+---
+# selfsigned_demo_ca/vars/vars_CentOS7.yml
+
+# python crypto packages to be installed
+python_crypto_packages:
+  - 'python-cryptography'
+

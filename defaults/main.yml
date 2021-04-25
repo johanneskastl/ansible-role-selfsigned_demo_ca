@@ -1,0 +1,17 @@
+---
+# selfsigned_demo_ca/defaults/main.yml
+
+# role logic
+generate_demo_ca: 'false'
+create_certs_for_hosts: 'false'
+
+# folders
+default_ca_target_folder: '/etc/pki/tls/private/'
+default_host_certs_target_folder: '/etc/pki/tls/private/'
+
+# ca settings
+default_organization_name: 'B1 Training Demo CA'
+default_ca_key_file: 'rootca.key'
+default_ca_crt_file: 'rootca.crt'
+
+

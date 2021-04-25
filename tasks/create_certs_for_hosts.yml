@@ -34,7 +34,7 @@
 # Tasks on localhost aka the ansible control host
 #
 - name: 'fetch the CSR file from the host'
-  fetch: 
+  fetch:
     src: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.csr"
     dest: "{{ ca_target_folder }}{{ ansible_fqdn }}.csr"
     flat: true

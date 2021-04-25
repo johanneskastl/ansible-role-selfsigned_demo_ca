@@ -40,3 +40,16 @@
   delegate_to: localhost
   # FIXME
   ignore_errors: "{{ ansible_check_mode }}"
+
+#
+# Transfer the files back to the host
+#
+- name: 'copy the fresh certificate back to the host'
+  copy:
+    src: "{{ ca_target_folder }}{{ ansible_fqdn }}.crt"
+    dest: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.crt"
+
+- name: 'copy the CA certificate back to the host'
+  copy:
+    src: "{{ ca_target_folder }}{{ ca_crt_file }}"
+    dest: "{{ host_certs_target_folder }}{{ ca_crt_file }}"

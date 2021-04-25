@@ -29,10 +29,10 @@
     flat: true
 
 - name: 'sign the CSR with CA key'
-  delegate_to: localhost
   openssl_certificate:
     path: "{{ ca_target_folder }}{{ ansible_fqdn }}.crt"
     csr_path: "{{ ca_target_folder }}{{ ansible_fqdn }}.csr"
     ownca_path: "{{ ca_target_folder }}{{ ca_crt_file }}"
     ownca_privatekey_path: "{{ ca_target_folder }}{{ ca_key_file }}"
     provider: ownca
+  delegate_to: localhost

@@ -22,6 +22,7 @@ default_ca_country_name: 'DE'
 default_ca_state_or_province_name: 'Bavaria'
 default_ca_locality_name: 'Rockolding'
 default_ca_key_type: 'RSA'
+default_ca_key_cipher: 'auto'
 default_ca_key_size: 4096
 default_ca_key_file: 'b1training_democa.key'
 default_ca_crt_file: 'b1training_democa.crt'

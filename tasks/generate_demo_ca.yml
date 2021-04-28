@@ -1,8 +1,8 @@
 ---
 # selfsigned_demo_ca/tasks/generate_demo_ca.yml
 
-- name: 'create the directory'
+- name: 'Demo CA: create the target directory'
   file:
-    path: " {{ ca_target_folder }}"
+    path: "{{ ca_target_folder }}"
     state: 'directory'
-    mode: "0700"
+    mode: '0700'

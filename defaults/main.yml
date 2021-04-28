@@ -8,6 +8,8 @@ create_certs_for_hosts: 'false'
 # folders
 default_ca_target_folder: '/etc/pki/tls/private/'
 default_host_certs_target_folder: '/etc/pki/tls/private/'
+
+# permission settings for the host certificates
 default_certs_file_user: 'root'
 default_certs_file_group: 'root'
 default_certs_file_mode: '0644'

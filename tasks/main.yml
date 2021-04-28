@@ -19,25 +19,8 @@
 #
 # set variables
 #
-- name: 'Set variable ca_target_folder if it is undefined'
-  set_fact:
-    ca_target_folder: "{{ default_ca_target_folder }}"
-  when: 'ca_target_folder is undefined'
-
-- name: 'Set variable host_certs_target_folder if it is undefined'
-  set_fact:
-    host_certs_target_folder: "{{ default_host_certs_target_folder }}"
-  when: 'host_certs_target_folder is undefined'
-
-- name: 'Set variable ca_crt_file if it is undefined'
-  set_fact:
-    ca_crt_file: "{{ default_ca_crt_file }}"
-  when: 'ca_crt_file is undefined'
-
-- name: 'Set variable ca_key_file if it is undefined'
-  set_fact:
-    ca_key_file: "{{ default_ca_key_file }}"
-  when: 'ca_key_file is undefined'
+- name: 'Parse variables'
+  include_tasks: parse_variables.yml
 
 #
 # install packages

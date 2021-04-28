@@ -16,6 +16,12 @@ default_certs_directory_mode: '0700'
 
 # ca settings
 default_ca_organization_name: 'B1 Systems GmbH'
+default_ca_organizational_unit_name: 'B1 Training'
+default_ca_country_name: 'DE'
+default_ca_state_or_province_name: 'Bavaria'
+default_ca_locality_name: 'Rockolding'
+default_ca_key_type: 'RSA'
+default_ca_key_size: 4096
 default_ca_key_file: 'b1training_democa.key'
 default_ca_crt_file: 'b1training_democa.crt'
 default_ca_csr_file: 'b1training_democa.csr'

@@ -11,10 +11,10 @@
 #
 # pre-flight checks
 #
-- name: 'fail if variable for rootca is not defined'
+- name: 'fail if variable for ca_key_passphrase is not defined'
   fail:
-    msg: 'variable for rootca is not defined'
-  when: 'ownca_privatekey_passphrase is undefined'
+    msg: 'variable for ca_key_passphrase is not defined'
+  when: 'ca_key_passphrase is undefined'
 
 #
 # set variables

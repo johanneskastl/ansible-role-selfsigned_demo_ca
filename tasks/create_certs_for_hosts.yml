@@ -104,3 +104,5 @@
       owner: "{{ certs_file_user | default(default_certs_file_user) }}"
       group: "{{ certs_file_group | default(default_certs_file_group) }}"
       mode: "{{ certs_file_mode | default(default_certs_file_mode) }}"
+  # FIXME
+  ignore_errors: "{{ ansible_check_mode }}"

@@ -25,6 +25,21 @@ Example Playbook
       roles:
          - { role: 'johanneskastl.selfsigned_demo_ca' }
 
+Example Playbook for creating a host certificate
+----------------
+
+    - hosts: servers
+      roles:
+        - role: 'johanneskastl.selfsigned_demo_ca'
+          vars:
+            ca_target_folder: 'B1_Training_demo_CA/'
+            host_certs_target_folder: '/some/folder/'
+            certs_file_user: 'ldap'
+            certs_file_group: 'ldap'
+            create_certs_for_hosts: 'true'
+            # NOT FOR PRODUCTION, use ansible vault or similar
+            ca_key_passphrase: 'somethingtotallysecret'
+
 License
 -------
 

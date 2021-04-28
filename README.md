@@ -18,12 +18,26 @@ Dependencies
 
 None
 
-Example Playbook
+Example Playbook for the creation of a Demo CA
 ----------------
 
-    - hosts: servers
+    - name: 'Create a self-signed CA on localhost'
+      hosts: 'localhost'
+      gather_facts: 'yes'
+      become: 'false'
+
       roles:
-         - { role: 'johanneskastl.selfsigned_demo_ca' }
+        - role: 'johanneskastl.selfsigned_demo_ca'
+          vars:
+            # this playbook creates the Demo CA, no certificates for hosts
+            generate_demo_ca: 'true'
+            create_certs_for_hosts: 'false'
+            # Variables for the CA
+            ca_key_file: 'b1training_democa.key'
+            ca_crt_file: 'b1training_democa.crt'
+            ca_target_folder: 'B1_Training_demo_CA/'
+            # NOT FOR PRODUCTION, use ansible vault or similar
+            ca_key_passphrase: 'somethingtotallysecret'
 
 Example Playbook for creating a host certificate
 ----------------

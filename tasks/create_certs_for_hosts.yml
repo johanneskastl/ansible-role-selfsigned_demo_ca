@@ -33,7 +33,7 @@
     path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.csr"
     privatekey_path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"
     country_name: DE
-    organization_name: "{{ default_organization_name }}"
+    organization_name: "{{ default_ca_organization_name }}"
     common_name: "{{ ansible_fqdn }}"
     subject_alt_name: "DNS:{{ ansible_host }},DNS:{{ ansible_fqdn }}"
   # FIXME

@@ -15,7 +15,7 @@ default_certs_key_file_mode: '0600'
 default_certs_directory_mode: '0700'
 
 # ca settings
-default_organization_name: 'B1 Training Demo CA'
+default_ca_organization_name: 'B1 Systems GmbH'
 default_ca_key_file: 'b1training_democa.key'
 default_ca_crt_file: 'b1training_democa.crt'
 default_ca_csr_file: 'b1training_democa.csr'

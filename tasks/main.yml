@@ -27,7 +27,8 @@
 #
 - name: 'Install python packages required by ansible'
   import_tasks: install_python_packages.yml
-  when: 'create_certs_for_hosts | bool'
+  become: 'true'
+  when: '"localhost" not in ansible_play_hosts'
 
 #
 # setting up a demo CA

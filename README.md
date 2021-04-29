@@ -3,6 +3,9 @@ selfsigned_demo_ca
 
 Setup a selfsigned demo CA (certificate authority) and generate certificates for hosts. In the latter case, the host's FQDN will be used as the `common name` for the certificate.
 
+*Attention*
+Due to limitations of the Ansible `fetch` module, creation of the Demo CA works on any host. But creation of host certificates and transfer back to the target host (currently) only works when the Demo CA was created on localhost.
+
 Requirements
 ------------
 

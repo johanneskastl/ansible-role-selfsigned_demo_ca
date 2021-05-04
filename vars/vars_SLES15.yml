@@ -1,0 +1,6 @@
+---
+# selfsigned_demo_ca/vars/vars_SLES15.yml
+
+# python crypto packages to be installed
+python_crypto_packages:
+  - 'python3-cryptography'

@@ -28,6 +28,7 @@
     country_name: "{{ ca_country_name }}"
     state_or_province_name: "{{ ca_state_or_province_name }}"
     locality_name: "{{ ca_locality_name }}"
+    basic_constraints: "{{ ca_basic_constraints }}"
   register: democa_csr_creation
 
 - name: 'Demo CA: sign the CSR'

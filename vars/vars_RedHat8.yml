@@ -1,0 +1,9 @@
+---
+# selfsigned_demo_ca/vars/vars_RedHat8.yml
+
+# python crypto packages to be installed
+python_crypto_packages:
+  - 'python3-cryptography'
+
+# SELinux context type
+selinux_setype: 'slapd_cert_t'

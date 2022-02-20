@@ -10,6 +10,9 @@ install_packages_on_localhost: 'false'
 default_ca_target_folder: '/etc/pki/tls/private/'
 default_host_certs_target_folder: '/etc/pki/tls/private/'
 
+# defaults for host certificates
+use_IP_address_only: 'false'
+
 # permission settings for the host certificates
 default_certs_file_user: 'root'
 default_certs_file_group: 'root'

@@ -2,6 +2,19 @@
 # selfsigned_demo_ca/tasks/create_certs_for_hosts.yml
 
 #
+#
+#
+- name: 'Prepare input for subject_alt_name if only IPs were desired'
+  set_fact:
+    subject_alt_name: "IP:{{ ansible_default_ipv4.address }}"
+  when: 'use_IP_address_only | bool'
+
+- name: 'Prepare input for subject_alt_name if hostnames are to be used'
+  set_fact:
+    subject_alt_name: "DNS:{{ ansible_host }},DNS:{{ ansible_fqdn }}"
+  when: 'not use_IP_address_only | bool'
+
+#
 # Tasks on the host
 #
 
@@ -35,7 +48,7 @@
     country_name: DE
     organization_name: "{{ ca_organization_name }}"
     common_name: "{{ ansible_fqdn }}"
-    subject_alt_name: "DNS:{{ ansible_host }},DNS:{{ ansible_fqdn }}"
+    subject_alt_name: "{{ subject_alt_name }}"
   # FIXME
   ignore_errors: "{{ ansible_check_mode }}"
 

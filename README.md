@@ -35,6 +35,9 @@ The variables that have a default are the following:
 - `ca_target_folder`: the folder to store the CA certificate, default ist `/etc/pki/tls/private/`
 - `host_certs_target_folder`: the folder on the target host where to store the host's certificate, default is `/etc/pki/tls/private/`
 
+# defaults for host certificates
+- `use_IP_address_only`: set this to true if you only want to have an IP address in the certificate, not DNS hostnames or FQDNs
+
 # permission settings for the host certificates
 - `certs_file_user`: user that will own the certificate files, default is `root`
 - `certs_file_group`: group that will own the certificate files, default is `root`

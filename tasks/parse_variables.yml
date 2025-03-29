@@ -2,7 +2,7 @@
 # selfsigned_demo_ca/tasks/parse_variables.yml
 
 # code from https://www.samdarwin.com/ansible-default-vars/
-- name: 'set facts based on defaults'
+- name: 'Set facts based on defaults'
   ansible.builtin.set_fact:
     "{{ item[8:] }}": "{{ lookup('vars', item) }}"
   when:

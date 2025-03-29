@@ -1,7 +1,11 @@
+---
+
 galaxy_info:
   role_name: 'selfsigned_demo_ca'
   author: 'Johannes Kastl'
-  description: 'Setup a selfsigned demo CA (certificate authority) and generate some certificates'
+  description: |
+    Setup a selfsigned demo CA (certificate authority)
+    and generate some certificates
 
   license: 'BSD-3-Clause'
 

@@ -8,8 +8,7 @@
     mode: '0700'
 
 - name: 'Demo CA: Create the private key'
-  # module will be renamed from openssl_privatekey to community.crypto.openssl_privatekey
-  ansible.builtin.openssl_privatekey:
+  community.crypto.openssl_privatekey:
     path: "{{ ca_target_folder }}/{{ ca_key_file }}"
     size: "{{ ca_key_size | int }}"
     type: "{{ ca_key_type }}"
@@ -18,8 +17,7 @@
   register: democa_key_creation
 
 - name: 'Demo CA: create the CSR'
-  # module will be renamed from openssl_csr to community.crypto.openssl_csr
-  ansible.builtin.openssl_csr:
+  community.crypto.openssl_csr:
     path: "{{ ca_target_folder }}/{{ ca_csr_file }}"
     privatekey_path: "{{ ca_target_folder }}/{{ ca_key_file }}"
     privatekey_passphrase: "{{ ca_key_passphrase }}"
@@ -32,8 +30,7 @@
   register: democa_csr_creation
 
 - name: 'Demo CA: sign the CSR'
-  # module will be renamed to community.crypto.x509_certificate
-  ansible.builtin.openssl_certificate:
+  community.crypto.openssl_certificate:
     path: "{{ ca_target_folder }}/{{ ca_crt_file }}"
     csr_path: "{{ ca_target_folder }}/{{ ca_csr_file }}"
     privatekey_path: "{{ ca_target_folder }}/{{ ca_key_file }}"

@@ -28,7 +28,7 @@
 #
 - name: 'Install python packages required by ansible'
   ansible.builtin.import_tasks: install_python_packages.yml
-  become: 'true'
+  become: true
   when: '"localhost" not in ansible_play_hosts or install_packages_on_localhost | bool'
 
 #

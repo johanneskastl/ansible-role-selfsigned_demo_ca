@@ -98,7 +98,7 @@
   ansible.builtin.file:
     path: "{{ item.path }}"
     owner: "{{ item.owner }}"
-    group:  "{{ item.group }}"
+    group: "{{ item.group }}"
     mode: "{{ item.mode }}"
   loop:
     - path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"

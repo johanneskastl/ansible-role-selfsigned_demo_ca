@@ -2,6 +2,6 @@
 # selfsigned_demo_ca/tasks/main.yml
 
 - name: 'Install python packages required by ansible'
-  package:
+  ansible.builtin.package:
     name: "{{ python_crypto_packages }}"
     state: 'present'

@@ -36,13 +36,13 @@
     - 'ansible_selinux.status == "enabled"'
 
 - name: 'Generate private key on the host'
-  ansible.builtin.openssl_privatekey:
+  community.crypto.openssl_privatekey:
     path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"
   # FIXME
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: 'Generate a CSR on the host'
-  ansible.builtin.openssl_csr:
+  community.crypto.openssl_csr:
     path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.csr"
     privatekey_path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"
     country_name: DE
@@ -62,7 +62,7 @@
     flat: true
 
 - name: 'Sign the CSR with CA key'
-  ansible.builtin.openssl_certificate:
+  community.crypto.openssl_certificate:
     path: "{{ ca_target_folder }}{{ ansible_fqdn }}.crt"
     csr_path: "{{ ca_target_folder }}{{ ansible_fqdn }}.csr"
     ownca_path: "{{ ca_target_folder }}{{ ca_crt_file }}"

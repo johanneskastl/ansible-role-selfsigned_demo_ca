@@ -69,7 +69,7 @@
     ownca_privatekey_path: "{{ ca_target_folder }}{{ ca_key_file }}"
     ownca_privatekey_passphrase: "{{ ca_key_passphrase }}"
     provider: ownca
-  become: 'false'
+  become: false
   delegate_to: localhost
   # FIXME
   ignore_errors: "{{ ansible_check_mode }}"

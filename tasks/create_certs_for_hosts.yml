@@ -30,6 +30,7 @@
   ansible.builtin.file:
     path: "{{ host_certs_target_folder }}"
     state: 'directory'
+    mode: '0700'
     setype: "{{ selinux_setype }}"
   when:
     - 'ansible_selinux.status is defined'
@@ -38,6 +39,7 @@
 - name: 'Generate private key on the host'
   community.crypto.openssl_privatekey:
     path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"
+    mode: '0600'
   # FIXME
   ignore_errors: "{{ ansible_check_mode }}"
 
@@ -81,6 +83,7 @@
   ansible.builtin.copy:
     src: "{{ ca_target_folder }}{{ ansible_fqdn }}.crt"
     dest: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.crt"
+    mode: '0644'
   # FIXME
   ignore_errors: "{{ ansible_check_mode }}"
 
@@ -88,6 +91,7 @@
   ansible.builtin.copy:
     src: "{{ ca_target_folder }}{{ ca_crt_file }}"
     dest: "{{ host_certs_target_folder }}{{ ca_crt_file }}"
+    mode: '0644'
   # FIXME
   ignore_errors: "{{ ansible_check_mode }}"
 

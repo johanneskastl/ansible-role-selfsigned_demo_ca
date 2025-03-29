@@ -18,7 +18,7 @@
 # Tasks on the host
 #
 
-- name: 'create the directory for the certificates'
+- name: 'Create the directory for the certificates'
   ansible.builtin.file:
     path: "{{ host_certs_target_folder }}"
     state: 'directory'
@@ -26,7 +26,7 @@
     group: "{{ certs_file_group }}"
     mode: "{{ certs_directory_mode }}"
 
-- name: "fix SELinux context for {{ host_certs_target_folder }}"
+- name: "Fix SELinux context for {{ host_certs_target_folder }}"
   ansible.builtin.file:
     path: "{{ host_certs_target_folder }}"
     state: 'directory'
@@ -35,13 +35,13 @@
     - 'ansible_selinux.status is defined'
     - 'ansible_selinux.status == "enabled"'
 
-- name: 'generate private key on the host'
+- name: 'Generate private key on the host'
   ansible.builtin.openssl_privatekey:
     path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"
   # FIXME
   ignore_errors: "{{ ansible_check_mode }}"
 
-- name: 'generate a CSR on the host'
+- name: 'Generate a CSR on the host'
   ansible.builtin.openssl_csr:
     path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.csr"
     privatekey_path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"
@@ -55,13 +55,13 @@
 #
 # Tasks on localhost aka the ansible control host
 #
-- name: 'fetch the CSR file from the host'
+- name: 'Fetch the CSR file from the host'
   ansible.builtin.fetch:
     src: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.csr"
     dest: "{{ ca_target_folder }}{{ ansible_fqdn }}.csr"
     flat: true
 
-- name: 'sign the CSR with CA key'
+- name: 'Sign the CSR with CA key'
   ansible.builtin.openssl_certificate:
     path: "{{ ca_target_folder }}{{ ansible_fqdn }}.crt"
     csr_path: "{{ ca_target_folder }}{{ ansible_fqdn }}.csr"
@@ -77,14 +77,14 @@
 #
 # Transfer the files back to the host
 #
-- name: 'copy the fresh certificate back to the host'
+- name: 'Copy the fresh certificate back to the host'
   ansible.builtin.copy:
     src: "{{ ca_target_folder }}{{ ansible_fqdn }}.crt"
     dest: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.crt"
   # FIXME
   ignore_errors: "{{ ansible_check_mode }}"
 
-- name: 'copy the CA certificate back to the host'
+- name: 'Copy the CA certificate back to the host'
   ansible.builtin.copy:
     src: "{{ ca_target_folder }}{{ ca_crt_file }}"
     dest: "{{ host_certs_target_folder }}{{ ca_crt_file }}"
@@ -94,7 +94,7 @@
 #
 # Fix user/group/permissions on the files
 #
-- name: 'fix user, group and permissions on certificate files'
+- name: 'Fix user, group and permissions on certificate files'
   ansible.builtin.file:
     path: "{{ item.path }}"
     owner: "{{ item.owner }}"

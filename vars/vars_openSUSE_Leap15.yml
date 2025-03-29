@@ -3,4 +3,4 @@
 
 # python crypto packages to be installed
 python_crypto_packages:
-  - 'python3-cryptography'
+  - 'python311-cryptography'

@@ -2,16 +2,16 @@
 # selfsigned_demo_ca/defaults/main.yml
 
 # role logic
-generate_demo_ca: 'false'
-create_certs_for_hosts: 'false'
-install_packages_on_localhost: 'false'
+generate_demo_ca: false
+create_certs_for_hosts: false
+install_packages_on_localhost: false
 
 # folders
 default_ca_target_folder: '/etc/pki/tls/private/'
 default_host_certs_target_folder: '/etc/pki/tls/private/'
 
 # defaults for host certificates
-use_ip_address_only: 'false'
+use_ip_address_only: false
 
 # permission settings for the host certificates
 default_certs_file_user: 'root'

@@ -12,7 +12,7 @@
 #
 # pre-flight checks
 #
-- name: 'fail if variable for ca_key_passphrase is not defined'
+- name: 'Fail if variable for ca_key_passphrase is not defined'
   ansible.builtin.fail:
     msg: 'variable for ca_key_passphrase is not defined'
   when: 'ca_key_passphrase is undefined'
@@ -41,6 +41,6 @@
 #
 # creating certificates for the hosts
 #
-- name: 'create certificates for hosts'
+- name: 'Create certificates for hosts'
   ansible.builtin.import_tasks: create_certs_for_hosts.yml
   when: 'create_certs_for_hosts | bool'

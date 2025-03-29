@@ -62,7 +62,7 @@
     flat: true
 
 - name: 'Sign the CSR with CA key'
-  community.crypto.openssl_certificate:
+  community.crypto.x509_certificate:
     path: "{{ ca_target_folder }}{{ ansible_fqdn }}.crt"
     csr_path: "{{ ca_target_folder }}{{ ansible_fqdn }}.csr"
     ownca_path: "{{ ca_target_folder }}{{ ca_crt_file }}"

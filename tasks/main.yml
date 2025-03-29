@@ -2,7 +2,7 @@
 # selfsigned_demo_ca/tasks/main.yml
 
 - name: 'Load variables'
-  include_vars: "{{ item }}"
+  ansible.builtin.include_vars: "{{ item }}"
   with_first_found:
     - "vars_{{ ansible_distribution | replace(' ', '_' ) }}{{ ansible_distribution_major_version }}.yml"
     - "vars_{{ ansible_distribution | replace(' ', '_' ) }}.yml"
@@ -13,7 +13,7 @@
 # pre-flight checks
 #
 - name: 'fail if variable for ca_key_passphrase is not defined'
-  fail:
+  ansible.builtin.fail:
     msg: 'variable for ca_key_passphrase is not defined'
   when: 'ca_key_passphrase is undefined'
 
@@ -21,13 +21,13 @@
 # set variables
 #
 - name: 'Parse variables'
-  include_tasks: parse_variables.yml
+  ansible.builtin.include_tasks: parse_variables.yml
 
 #
 # install packages
 #
 - name: 'Install python packages required by ansible'
-  import_tasks: install_python_packages.yml
+  ansible.builtin.import_tasks: install_python_packages.yml
   become: 'true'
   when: '"localhost" not in ansible_play_hosts or install_packages_on_localhost | bool'
 
@@ -35,12 +35,12 @@
 # setting up a demo CA
 #
 - name: 'Generate the demo CA'
-  import_tasks: generate_demo_ca.yml
+  ansible.builtin.import_tasks: generate_demo_ca.yml
   when: 'generate_demo_ca | bool'
 
 #
 # creating certificates for the hosts
 #
 - name: 'create certificates for hosts'
-  import_tasks: create_certs_for_hosts.yml
+  ansible.builtin.import_tasks: create_certs_for_hosts.yml
   when: 'create_certs_for_hosts | bool'

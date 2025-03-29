@@ -36,7 +36,7 @@ The variables that have a default are the following:
 - `host_certs_target_folder`: the folder on the target host where to store the host's certificate, default is `/etc/pki/tls/private/`
 
 # defaults for host certificates
-- `use_IP_address_only`: set this to true if you only want to have an IP address in the certificate, not DNS hostnames or FQDNs
+- `use_ip_address_only`: set this to true if you only want to have an IP address in the certificate, not DNS hostnames or FQDNs
 
 # permission settings for the host certificates
 - `certs_file_user`: user that will own the certificate files, default is `root`

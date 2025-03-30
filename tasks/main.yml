@@ -18,6 +18,16 @@
   when: 'ca_key_passphrase is undefined'
 
 #
+# backwards compatibility
+#
+- name: 'Set variable use_ip_address_only if use_IP_address_only is defined'
+  ansible.builtin.set_fact:
+    use_ip_address_only: "{{ use_IP_address_only }}"
+  when:
+    - 'use_IP_address_only is defined'
+    - 'use_ip_address_only is undefined'
+
+#
 # set variables
 #
 - name: 'Parse variables'

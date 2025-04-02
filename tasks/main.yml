@@ -27,6 +27,12 @@
     - 'use_IP_address_only is defined'
     - 'use_ip_address_only is undefined'
 
+- name: 'Set variable install_packages if install_packages_on_localhost is defined'
+  ansible.builtin.set_fact:
+    install_packages: "{{ install_packages_on_localhost }}"
+  when:
+    - 'install_packages_on_localhost is defined'
+
 #
 # set variables
 #

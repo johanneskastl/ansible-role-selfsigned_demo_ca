@@ -4,7 +4,7 @@
 # role logic
 generate_demo_ca: false
 create_certs_for_hosts: false
-install_packages_on_localhost: false
+install_packages: false
 
 # folders
 default_ca_target_folder: '/etc/pki/tls/private/'

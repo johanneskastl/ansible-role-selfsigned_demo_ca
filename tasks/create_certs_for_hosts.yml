@@ -5,44 +5,46 @@
 #
 #
 - name: 'Prepare input for subject_alt_name if only IPs were desired'
-  set_fact:
+  ansible.builtin.set_fact:
     subject_alt_name: "IP:{{ ansible_default_ipv4.address }}"
-  when: 'use_IP_address_only | bool'
+  when: 'use_ip_address_only | bool'
 
 - name: 'Prepare input for subject_alt_name if hostnames are to be used'
-  set_fact:
+  ansible.builtin.set_fact:
     subject_alt_name: "DNS:{{ ansible_host }},DNS:{{ ansible_fqdn }}"
-  when: 'not use_IP_address_only | bool'
+  when: 'not use_ip_address_only | bool'
 
 #
 # Tasks on the host
 #
 
-- name: 'create the directory for the certificates'
-  file:
+- name: 'Create the directory for the certificates'
+  ansible.builtin.file:
     path: "{{ host_certs_target_folder }}"
     state: 'directory'
     owner: "{{ certs_file_user }}"
     group: "{{ certs_file_group }}"
     mode: "{{ certs_directory_mode }}"
 
-- name: "fix SELinux context for {{ host_certs_target_folder }}"
-  file:
+- name: "Fix SELinux context for {{ host_certs_target_folder }}"
+  ansible.builtin.file:
     path: "{{ host_certs_target_folder }}"
     state: 'directory'
+    mode: '0700'
     setype: "{{ selinux_setype }}"
   when:
     - 'ansible_selinux.status is defined'
     - 'ansible_selinux.status == "enabled"'
 
-- name: 'generate private key on the host'
-  openssl_privatekey:
+- name: 'Generate private key on the host'
+  community.crypto.openssl_privatekey:
     path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"
+    mode: '0600'
   # FIXME
   ignore_errors: "{{ ansible_check_mode }}"
 
-- name: 'generate a CSR on the host'
-  openssl_csr:
+- name: 'Generate a CSR on the host'
+  community.crypto.openssl_csr:
     path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.csr"
     privatekey_path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"
     country_name: DE
@@ -55,21 +57,21 @@
 #
 # Tasks on localhost aka the ansible control host
 #
-- name: 'fetch the CSR file from the host'
-  fetch:
+- name: 'Fetch the CSR file from the host'
+  ansible.builtin.fetch:
     src: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.csr"
     dest: "{{ ca_target_folder }}{{ ansible_fqdn }}.csr"
     flat: true
 
-- name: 'sign the CSR with CA key'
-  openssl_certificate:
+- name: 'Sign the CSR with CA key'
+  community.crypto.x509_certificate:
     path: "{{ ca_target_folder }}{{ ansible_fqdn }}.crt"
     csr_path: "{{ ca_target_folder }}{{ ansible_fqdn }}.csr"
     ownca_path: "{{ ca_target_folder }}{{ ca_crt_file }}"
     ownca_privatekey_path: "{{ ca_target_folder }}{{ ca_key_file }}"
     ownca_privatekey_passphrase: "{{ ca_key_passphrase }}"
     provider: ownca
-  become: 'false'
+  become: false
   delegate_to: localhost
   # FIXME
   ignore_errors: "{{ ansible_check_mode }}"
@@ -77,28 +79,30 @@
 #
 # Transfer the files back to the host
 #
-- name: 'copy the fresh certificate back to the host'
-  copy:
+- name: 'Copy the fresh certificate back to the host'
+  ansible.builtin.copy:
     src: "{{ ca_target_folder }}{{ ansible_fqdn }}.crt"
     dest: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.crt"
+    mode: '0644'
   # FIXME
   ignore_errors: "{{ ansible_check_mode }}"
 
-- name: 'copy the CA certificate back to the host'
-  copy:
+- name: 'Copy the CA certificate back to the host'
+  ansible.builtin.copy:
     src: "{{ ca_target_folder }}{{ ca_crt_file }}"
     dest: "{{ host_certs_target_folder }}{{ ca_crt_file }}"
+    mode: '0644'
   # FIXME
   ignore_errors: "{{ ansible_check_mode }}"
 
 #
 # Fix user/group/permissions on the files
 #
-- name: 'fix user, group and permissions on certificate files'
-  file:
+- name: 'Fix user, group and permissions on certificate files'
+  ansible.builtin.file:
     path: "{{ item.path }}"
     owner: "{{ item.owner }}"
-    group:  "{{ item.group }}"
+    group: "{{ item.group }}"
     mode: "{{ item.mode }}"
   loop:
     - path: "{{ host_certs_target_folder }}{{ ansible_fqdn }}.key"

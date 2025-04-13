@@ -2,16 +2,16 @@
 # selfsigned_demo_ca/defaults/main.yml
 
 # role logic
-generate_demo_ca: 'false'
-create_certs_for_hosts: 'false'
-install_packages_on_localhost: 'false'
+generate_demo_ca: false
+create_certs_for_hosts: false
+install_packages: false
 
 # folders
 default_ca_target_folder: '/etc/pki/tls/private/'
 default_host_certs_target_folder: '/etc/pki/tls/private/'
 
 # defaults for host certificates
-use_IP_address_only: 'false'
+use_ip_address_only: false
 
 # permission settings for the host certificates
 default_certs_file_user: 'root'
@@ -21,16 +21,16 @@ default_certs_key_file_mode: '0600'
 default_certs_directory_mode: '0700'
 
 # ca settings
-default_ca_common_name: 'B1 Training Demo CA'
-default_ca_organization_name: 'B1 Systems GmbH'
-default_ca_organizational_unit_name: 'B1 Training'
+default_ca_common_name: 'Example.org Demo CA'
+default_ca_organization_name: 'Example.org Inc.'
+default_ca_organizational_unit_name: 'Example.org'
 default_ca_country_name: 'DE'
 default_ca_state_or_province_name: 'Bavaria'
-default_ca_locality_name: 'Rockolding'
+default_ca_locality_name: 'Regensburh'
 default_ca_basic_constraints: 'CA:TRUE'
 default_ca_key_type: 'RSA'
 default_ca_key_cipher: 'auto'
 default_ca_key_size: 4096
-default_ca_key_file: 'b1training_democa.key'
-default_ca_crt_file: 'b1training_democa.crt'
-default_ca_csr_file: 'b1training_democa.csr'
+default_ca_key_file: 'exampleorg_democa.key'
+default_ca_crt_file: 'exampleorg_democa.crt'
+default_ca_csr_file: 'exampleorg_democa.csr'
